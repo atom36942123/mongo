@@ -55,6 +55,10 @@ async def update_user(request:Request,id:str,payload:dict=Body(...)):
     return response.modified_count
 
 
+
+
+
+
 #delete
 @router.delete("/delete-user/{id}")
 async def delete_user(request:Request,id:str):
