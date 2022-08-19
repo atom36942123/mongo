@@ -1,0 +1,16 @@
+anyio==3.6.1
+beanie==1.11.8
+click==8.1.3
+fastapi==0.79.0
+h11==0.13.0
+idna==3.3
+motor==3.0.0
+multidict==6.0.2
+pydantic==1.9.2
+pymongo==4.2.0
+sniffio==1.2.0
+starlette==0.19.1
+toml==0.10.2
+typing_extensions==4.3.0
+uvicorn==0.18.2
+yarl==1.8.1
