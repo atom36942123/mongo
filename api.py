@@ -2,11 +2,19 @@
 from fastapi import APIRouter
 router=APIRouter(tags=["api"])
 
+#import
+from bson import ObjectId
+from fastapi import Request
+from fastapi import Body
+
+
+#datbase
+from app import database
+
+
 
 
 #create
-from fastapi import Request
-from fastapi import Body
 @router.post("/create-user")
 async def create_user(request:Request,payload:dict=Body(...)):
     response=await database.user.insert_one(payload)
@@ -15,18 +23,15 @@ async def create_user(request:Request,payload:dict=Body(...)):
 
 
 
-
 #read
-@router.get("/read-user-all")
-async def read_user_all(request:Request):
+@router.get("/read-user-all/{limit}")
+async def read_user_all(request:Request,limit:int):
     user_list=[]
-    async for i in database.user.find().limit(3):
+    async for i in database.user.find().limit(limit):
         i['_id']=str(i['_id'])
-        user_list.routerend(i)
+        user_list.append(i)
     return user_list
 
-from bson import ObjectId
-from fastapi import HTTPException
 @router.get("/read-user-single-id/{id}")
 async def read_user_single_id(request:Request,id:str):
     response=await database.user.find_one({"_id": ObjectId(id)})
@@ -34,7 +39,6 @@ async def read_user_single_id(request:Request,id:str):
         response['_id']=str(response['_id'])
     return response
 
-from fastapi import Request
 @router.get("/read-user-single-name/{name}")
 async def read_user_single_name(request:Request,name:str):
     response=await database.user.find_one({"name":name})
