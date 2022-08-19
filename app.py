@@ -12,7 +12,7 @@ database=mongo_url_client.atom
 @app.get("/")
 async def root():
     return {"message":"Welcome to root"}
- 
+
 #router
 from api import router
 app.include_router(router)
